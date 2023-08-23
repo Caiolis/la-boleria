@@ -6,3 +6,7 @@ export function insertClientIntoDb(body) {
     [body.name, body.address, body.phone]
   );
 }
+
+export function searchClientById(id) {
+  return db.query("SELECT * FROM clients WHERE id=$1;", [id]);
+}

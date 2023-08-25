@@ -1,6 +1,7 @@
 // repositories
 import { searchCakeById } from "../repositories/cake.repository.js";
 import { searchClientById } from "../repositories/client.repository.js";
+import { searchAllOrders } from "../repositories/order.repository.js";
 
 export async function verifyExistance(req, res, next) {
   const { clientId, cakeId } = req.body;
@@ -15,5 +16,16 @@ export async function verifyExistance(req, res, next) {
     next();
   } catch (err) {
     res.status(500).send(err.message);
-  }
+  };
+};
+
+export async function verifyOrders(req, res, next) {
+  try {
+    const query = await searchAllOrders();
+    if (query.rows.length === 0) return res.status(404).send([]);
+
+    next();
+  } catch (err) {
+    res.status(500).send(err.message);
+  };
 };

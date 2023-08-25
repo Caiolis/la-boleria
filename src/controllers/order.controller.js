@@ -78,9 +78,6 @@ export async function getOrderById(req, res) {
         createdAt: formattedDate,
         quantity: query.rows[0].quantity,
       }
-    
-    console.log(orderObject)
-    console.log(query)
     res.status(200).send(orderObject)
   } catch (err) {
     res.status(500).send(err.message);
